@@ -391,7 +391,7 @@ html {
 }
 
 .about_us_image {
-    background-image: url('./images/AlbedoBase_XL_A_clean_3Dstyle_flatmodern_illustration_featurin_0.svg');
+    background-image: url('./images/people.svg');
     width: 437.3468322753906px;
     height: 437.3468322753906px;
     position: relative;
@@ -1471,6 +1471,33 @@ html {
 
     font-size: 14px;
 }
+/* Colored tick circles */
+.tick-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Status colors */
+.done .tick-icon {
+  background-color: #22C55E; /* green */
+}
+
+.in-progress .tick-icon {
+  background-color: #FACC15; /* yellow */
+  color: black;
+}
+
+.pending .tick-icon {
+  background-color: #9CA3AF; /* gray */
+}
+
 @media (max-width: 1024px) {
     .otside_wrapper {
       padding-left: 40px;
