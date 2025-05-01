@@ -1,4 +1,5 @@
 
+//accordian logic
 
 document.addEventListener('DOMContentLoaded', function () {
     const headers = document.querySelectorAll('.accordion-header');
@@ -19,23 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
   
-//   document.querySelectorAll('.nav_links a').forEach(anchor => {
-//     anchor.addEventListener('click', function (e) {
-//       e.preventDefault();
-  
-//       const target = document.querySelector(this.getAttribute('href'));
-  
-//       if (target) {
-//         window.scrollTo({
-//           top: target.offsetTop,
-//           behavior: 'smooth'
-//         });
-//       }
-//     });
-//   });
 
 
 
+//slick slider logic
 
 const container = document.querySelector('.industries_served_cards');
 const leftArrow = document.querySelector('.slider_arrows img:first-child');
@@ -53,9 +41,9 @@ for (let i = 0; i < totalDots; i++) {
   dotsContainer.appendChild(dot);
 }
 
-// Update active dot
+
 function updateDots() {
-  const dots = document.querySelectorAll('.slider_dots .dot');
+  const dots = document.querySelectorAll('.slider_dots .sliderdot');
   const activeDotIndex = Math.floor(currentIndex / (cards.length / totalDots));
   dots.forEach(dot => dot.classList.remove('active'));
   if (dots[activeDotIndex]) {
@@ -63,30 +51,33 @@ function updateDots() {
   }
 }
 
-// Scroll left
+
 leftArrow.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
     container.scrollBy({
-      left: -270, // card width + gap
+      left: -270,
       behavior: 'smooth'
     });
     updateDots();
   }
 });
 
-// Scroll right
+
 rightArrow.addEventListener('click', () => {
   if (currentIndex < cards.length - 1) {
     currentIndex++;
     container.scrollBy({
-      left: 270, // card width + gap
+      left: 270, 
       behavior: 'smooth'
     });
     updateDots();
   }
 });
 
+
+
+//banner logic
 
 const headlines = [
   `Say Hello to Tech Zink — <br><span class="thinks_ahead_txt">Smart Tech, Real Impact.</span>`,
@@ -102,13 +93,13 @@ const subtexts = [
 
 const headingEl = document.querySelector(".crafting_technology_txt");
 const subtextEl = document.getElementById("subtext");
-const dots = document.querySelectorAll(".three_dots_banner .dot");
+const dots = document.querySelectorAll(".three_dots_banner .bannerdot");
 
 let index = 0;
 
 function typeText(element, html, speed = 30, callback) {
   let i = 0;
-  element.innerHTML = ""; // clear content
+  element.innerHTML = ""; 
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html;
   const fullHTML = tempDiv.innerHTML;
@@ -116,7 +107,7 @@ function typeText(element, html, speed = 30, callback) {
   function typeChar() {
     element.innerHTML = fullHTML.slice(0, i++) + "<span class='cursor'>|</span>";
     if (i <= fullHTML.length) {
-      setTimeout(typeChar, speed); // slower speed here
+      setTimeout(typeChar, speed); 
     } else {
       element.innerHTML = fullHTML;
       if (callback) callback();
@@ -130,15 +121,15 @@ function updateBanner() {
   dots.forEach(dot => dot.classList.remove("active"));
   dots[index].classList.add("active");
 
-  typeText(headingEl, headlines[index], 35, () => {
-    typeText(subtextEl, subtexts[index], 35);
+  typeText(headingEl, headlines[index], 70, () => {
+    typeText(subtextEl, subtexts[index], 70);
   });
 
   index = (index + 1) % headlines.length;
 }
 
 updateBanner();
-setInterval(updateBanner, 15000); // increased interval to give more time for animation
+setInterval(updateBanner, 22000); 
 
 
 const canvas = document.getElementById('stickCanvas');
@@ -170,17 +161,17 @@ for (let i = 0; i < particleCount; i++) {
 function animate() {
   ctx.clearRect(0, 0, width, height);
 
-  // Draw particles
+  
   for (let i = 0; i < particleCount; i++) {
     const p = particles[i];
     p.x += p.vx;
     p.y += p.vy;
 
-    // Bounce off edges
+   
     if (p.x < 0 || p.x > width) p.vx *= -1;
     if (p.y < 0 || p.y > height) p.vy *= -1;
 
-    // Draw dot
+    
     ctx.beginPath();
     ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
     ctx.fillStyle = '#ffffff';
@@ -214,4 +205,25 @@ const navLinks = document.getElementById('navLinks');
 
 hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('show');
+});
+
+
+//animation logic
+const ids = ["about", "services", "about","faq","accordion","industries","whyus","contact","our_mission_txt","mission_card","ourcurrentfocus"];
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+ids.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.classList.add('fade-in-slide'); 
+    observer.observe(el);
+  }
 });
