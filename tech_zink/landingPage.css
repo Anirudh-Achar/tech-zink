@@ -109,7 +109,7 @@ html {
 }
 
 .banner_text {
-  min-width: 50%;
+  min-width: 55%;
 }
 
 #stickCanvas {
@@ -294,6 +294,12 @@ html {
   border-radius: 50%;
   object-fit: cover;
   animation: floatImage 3s infinite ease-in-out;
+}
+
+@media(max-width:1360px){
+  .banner_text {
+    min-width: 60%;
+  }
 }
 
 @media (max-width: 1024px) {

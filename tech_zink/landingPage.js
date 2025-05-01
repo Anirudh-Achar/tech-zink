@@ -121,7 +121,9 @@ function updateBanner() {
   dots.forEach(dot => dot.classList.remove("active"));
   dots[index].classList.add("active");
 
+  // Start typing the headline first
   typeText(headingEl, headlines[index], 70, () => {
+    // After the heading is typed, start typing the subtext
     typeText(subtextEl, subtexts[index], 70);
   });
 
@@ -129,7 +131,8 @@ function updateBanner() {
 }
 
 updateBanner();
-setInterval(updateBanner, 22000); 
+setInterval(updateBanner, 22000);
+
 
 
 const canvas = document.getElementById('stickCanvas');
